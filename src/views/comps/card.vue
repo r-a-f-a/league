@@ -3,7 +3,7 @@
     <div class="wrapper">
     <div class="clash-card barbarian">
     <div class="clash-card__image clash-card__image--barbarian">
-    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian.png" alt="barbarian" />
+    <img :src="`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}_0.jpg`" alt="barbarian" />
     </div>
     <div class="clash-card__level clash-card__level--barbarian">{{details.title}}</div>
     <div class="clash-card__unit-name">{{name}}</div>
@@ -30,7 +30,7 @@
     </div>
     </div>
 
-    </div> <!-- end clash-card barbarian-->
+    </div> <!-- end card -->
     </div> <!-- end wrapper -->
   
 </template>
@@ -47,11 +47,9 @@ export default {
     }
   },
   created(){
-    // console.log("CRIOU O COMPONENTE")
     this.getInfo();
   },
   mounted(){
-    // console.log("MONTOU O COMPONENTE")
   },
   computed:{
     name () {
