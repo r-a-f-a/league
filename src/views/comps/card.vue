@@ -5,28 +5,29 @@
     <div class="clash-card__image clash-card__image--barbarian">
     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian.png" alt="barbarian" />
     </div>
-    <div class="clash-card__level clash-card__level--barbarian">Level 4</div>
-    <div class="clash-card__unit-name">{{champion}}</div>
-    <div class="clash-card__unit-description">
-    The Barbarian is a kilt-clad Scottish warrior with an angry, battle-ready expression, hungry for destruction. He has Killer yellow horseshoe mustache.
-    </div>
+    <div class="clash-card__level clash-card__level--barbarian">{{details.title}}</div>
+    <div class="clash-card__unit-name">{{name}}</div>
+    <div class="clash-card__unit-description">{{details.lore}}</div>
 
     <div class="clash-card__unit-stats clash-card__unit-stats--barbarian clearfix">
     <div class="one-third">
-    <div class="stat">20<sup>S</sup></div>
-    <div class="stat-value">Training</div>
+    <div class="stat">Q</div>
+    <div class="stat-value">
+      <img :src="`http://ddragon.leagueoflegends.com/cdn/11.10.1/img/spell/${name}Q.png`" />
+    </div>
     </div>
 
     <div class="one-third">
-    <div class="stat">16</div>
-    <div class="stat-value">Speed</div>
+    <div class="stat">W</div>
+    <div class="stat-value">
+      <img :src="`http://ddragon.leagueoflegends.com/cdn/11.10.1/img/spell/${name}W.png`" />
     </div>
-    
-    <div class="one-third no-border">
-    <div class="stat">150</div>
-    <div class="stat-value">Cost</div>
     </div>
 
+    <div class="one-third no-border">
+    <div class="stat">E</div>
+    <div class="stat-value"><img :src="`http://ddragon.leagueoflegends.com/cdn/11.10.1/img/spell/${name}E.png`" /></div>
+    </div>
     </div>
 
     </div> <!-- end clash-card barbarian-->
@@ -35,10 +36,37 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "card-champ",
   props:['champion'],
-  components: {}
+  components: {},
+  data() {
+    return {
+      details: {}
+    }
+  },
+  created(){
+    // console.log("CRIOU O COMPONENTE")
+    this.getInfo();
+  },
+  mounted(){
+    // console.log("MONTOU O COMPONENTE")
+  },
+  computed:{
+    name () {
+      let name = this.champion.toLowerCase();
+      return name.charAt(0).toUpperCase() + name.slice(1)
+    }
+  },
+  methods: {
+    getInfo(){
+       axios.get(`http://ddragon.leagueoflegends.com/cdn/9.19.1/data/pt_BR/champion/${this.name}.json`).then(result => {
+        console.log("RESULT DATA", result)
+        this.details = result.data.data[this.name]
+      })
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
