@@ -1,14 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import RAFAO from '../views/rafao.vue'
+import HOME from '../views/Home.vue'
+import CHAMPS from '../views/Champs.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: RAFAO
+    name: 'home',
+    component: HOME
+  },
+  {
+    path: '/champs/:id',
+    name: 'Champ',
+    component: CHAMPS
   },
   {
     path: '/about',
