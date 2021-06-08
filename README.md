@@ -4,6 +4,7 @@ TODO
 - Listar todos os champs;
 - Adicionar passiva e R no card do champion;
 - Transformar em super trunfo
+- Utilizar Transition no CARD
 
 
 ## Project setup

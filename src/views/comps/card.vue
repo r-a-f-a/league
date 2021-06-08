@@ -1,92 +1,117 @@
 <template>
-  
-    <div class="wrapper">
+  <div class="wrapper">
     <div class="clash-card barbarian">
-    <div class="clash-card__image clash-card__image--barbarian">
-    <img :src="`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}_0.jpg`" alt="barbarian" />
-    </div>
-    <div class="clash-card__level clash-card__level--barbarian">{{details.title}}</div>
-    <div class="clash-card__unit-name">{{name}}</div>
-    <div class="clash-card__unit-description">{{details.lore}}</div>
+      <div class="clash-card__image clash-card__image--barbarian">
+        <img
+          :src="`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}_0.jpg`"
+          alt="SplashArt"
+        />
+      </div>
+      <div class="clash-card__level clash-card__level--barbarian">
+        {{ details.title }}
+      </div>
+      <div class="clash-card__unit-name">{{ name }}</div>
+      <div class="clash-card__unit-description">{{ details.lore }}</div>
 
-    <div class="clash-card__unit-stats clash-card__unit-stats--barbarian clearfix">
-    <div class="one-third">
-    <div class="stat">Q</div>
-    <div class="stat-value">
-      <img :src="`http://ddragon.leagueoflegends.com/cdn/11.10.1/img/spell/${name}Q.png`" />
-    </div>
-    </div>
+      <div
+        class="clash-card__unit-skills clash-card__unit-stats--barbarian clearfix"
+      >
+        <div class="one-third">
+          <div class="stat">Q</div>
+            <img class="img-icon"
+              
+              :src="`http://ddragon.leagueoflegends.com/cdn/11.10.1/img/spell/${name}Q.png`"
+            />
+        </div>
 
-    <div class="one-third">
-    <div class="stat">W</div>
-    <div class="stat-value">
-      <img :src="`http://ddragon.leagueoflegends.com/cdn/11.10.1/img/spell/${name}W.png`" />
-    </div>
-    </div>
+        <div class="one-third">
+          <div class="stat">W</div>
+            <img class="img-icon"
+              :src="`http://ddragon.leagueoflegends.com/cdn/11.10.1/img/spell/${name}W.png`"
+            />
+        </div>
 
-    <div class="one-third no-border">
-    <div class="stat">E</div>
-    <div class="stat-value"><img :src="`http://ddragon.leagueoflegends.com/cdn/11.10.1/img/spell/${name}E.png`" /></div>
-    </div>
-    </div>
+        <div class="one-third ">
+          <div class="stat">E</div>
+            <img class="img-icon"
+              :src="`http://ddragon.leagueoflegends.com/cdn/11.10.1/img/spell/${name}E.png`"
+            />
+        </div>
 
-    </div> <!-- end card -->
-    </div> <!-- end wrapper -->
-  
+        <div class="one-third no-border">
+          <div class="stat">R</div>
+            <img class="img-icon"
+              :src="`http://ddragon.leagueoflegends.com/cdn/11.10.1/img/spell/${name}R.png`"
+            />
+        </div>
+        
+      </div>
+    </div>
+    <!-- end card -->
+  </div>
+  <!-- end wrapper -->
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   name: "card-champ",
-  props:['champion'],
+  props: ["champion"],
   components: {},
   data() {
     return {
-      details: {}
-    }
+      details: {},
+    };
   },
-  created(){
+  created() {
     this.getInfo();
   },
-  mounted(){
-  },
-  computed:{
-    name () {
+  mounted() {},
+  computed: {
+    name() {
       let name = this.champion.toLowerCase();
-      return name.charAt(0).toUpperCase() + name.slice(1)
-    }
+      return name.charAt(0).toUpperCase() + name.slice(1);
+    },
   },
   methods: {
-    getInfo(){
-       axios.get(`http://ddragon.leagueoflegends.com/cdn/9.19.1/data/pt_BR/champion/${this.name}.json`).then(result => {
-        console.log("RESULT DATA", result)
-        this.details = result.data.data[this.name]
-      })
-    }
-  }
-}
+    getInfo() {
+      axios
+        .get(
+          `http://ddragon.leagueoflegends.com/cdn/9.19.1/data/pt_BR/champion/${this.name}.json`
+        )
+        .then((result) => {
+          console.log("RESULT DATA", result);
+          this.details = result.data.data[this.name];
+        });
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,900);
 
 $border-radius-size: 14px;
-$barbarian: #EC9B3B;
-$archer: #EE5487;
-$giant: #F6901A;
-$goblin: #82BB30;
-$wizard: #4FACFF;
+$barbarian: #109c91;
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
 
 body {
-  background: linear-gradient(to bottom, rgba(140,122,122,1) 0%, rgba(175,135,124,1) 65%, rgba(175,135,124,1) 100%) fixed;
-  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/coc-background.jpg') no-repeat center center fixed;
+  background: linear-gradient(
+      to bottom,
+      rgba(140, 122, 122, 1) 0%,
+      rgba(175, 135, 124, 1) 65%,
+      rgba(175, 135, 124, 1) 100%
+    )
+    fixed;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/coc-background.jpg")
+    no-repeat center center fixed;
   background-size: cover;
   font: 14px/20px "Lato", Arial, sans-serif;
-  color: #9E9E9E;
+  color: #9e9e9e;
   margin-top: 30px;
 }
 
@@ -99,13 +124,11 @@ body {
 .wrapper {
   padding-top: 40px;
   padding-bottom: 40px;
-  
+
   &:focus {
     outline: 0;
   }
 }
-
-
 
 .clash-card {
   background: white;
@@ -117,6 +140,7 @@ body {
   text-align: center;
   box-shadow: -1px 15px 30px -12px black;
   z-index: 9999;
+  padding: 2px;
 }
 
 .clash-card__image {
@@ -128,52 +152,12 @@ body {
 }
 
 .clash-card__image--barbarian {
-  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian-bg.jpg');
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian-bg.jpg");
   img {
-    width: 400px;
-    position: absolute;    
-    top: -65px;
-    left: -70px;
-  }
-}
-
-.clash-card__image--archer {
-  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/archer-bg.jpg');
-  img {
-    width: 400px;
-    position: absolute;    
-    top: -34px;
-    left: -37px;
-  }
-}
-
-.clash-card__image--giant {
-  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/giant-bg.jpg');
-  img {
-    width: 340px;
-    position: absolute;    
-    top: -30px;
-    left: -25px;
-  }
-}
-
-.clash-card__image--goblin {
-  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/goblin-bg.jpg');
-  img {
-    width: 370px;
-    position: absolute;    
-    top: -21px;
-    left: -37px;
-  }
-}
-
-.clash-card__image--wizard {
-  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/wizard-bg.jpg');
-  img {
-    width: 345px;
-    position: absolute;    
-    top: -28px;
-    left: -10px;
+    width: 100%;
+    height: 100%;
+    position: center;
+    border-radius: $border-radius-size + 5;
   }
 }
 
@@ -188,22 +172,6 @@ body {
   color: $barbarian;
 }
 
-.clash-card__level--archer {
-  color: $archer;
-}
-
-.clash-card__level--giant {
-  color: $giant;
-}
-
-.clash-card__level--goblin {
-  color: $goblin;
-}
-
-.clash-card__level--wizard {
-  color: $wizard;
-}
-
 .clash-card__unit-name {
   font-size: 26px;
   color: black;
@@ -213,79 +181,39 @@ body {
 
 .clash-card__unit-description {
   padding: 20px;
-  margin-bottom: 10px;  
+  margin-bottom: 10px;
 }
 
 .clash-card__unit-stats--barbarian {
   background: $barbarian;
-  
+
   .one-third {
-     border-right: 1px solid #BD7C2F;
+    border-right: 1px solid #bd7c2f;
   }
 }
 
-.clash-card__unit-stats--archer {
-  background: $archer;
-  
-  .one-third {
-     border-right: 1px solid #D04976;
-  }
-}
 
-.clash-card__unit-stats--giant {
-  background: $giant;
-  
-  .one-third {
-     border-right: 1px solid darken($giant, 8%);
-  }
-}
-
-.clash-card__unit-stats--goblin {
-  background: $goblin;
-  
-  .one-third {
-     border-right: 1px solid darken($goblin, 6%);
-  }
-}
-
-.clash-card__unit-stats--wizard {
-  background: $wizard;
-  
-  .one-third {
-     border-right: 1px solid darken($wizard, 6%);
-  }
-}
-
-.clash-card__unit-stats {
-  
+.clash-card__unit-skills {
   color: white;
   font-weight: 700;
   border-bottom-left-radius: $border-radius-size;
   border-bottom-right-radius: $border-radius-size;
-  
+
+
   .one-third {
-    width: 33%;
+    width: relative;
     float: left;
-    padding: 20px 15px;
+    padding-right:4px;
+    padding-bottom: 10px;
+    margin-left: 5px;
+    
+    
   }
-  
-  sup {
-    position: absolute;
-    bottom: 4px; 
-    font-size: 45%;
-    margin-left: 2px;
-  }
-  
+
   .stat {
-    position: relative;
-    font-size: 24px;
+    position: center;
+    font-size: 20px;
     margin-bottom: 10px;
-  }
-  
-  .stat-value {
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 12px;
   }
 
   .no-border {
@@ -294,12 +222,12 @@ body {
 }
 
 .clearfix:after {
-	visibility: hidden;
-	display: block;
-	font-size: 0;
-	content: " ";
-	clear: both;
-	height: 0;
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
 }
 
 .slick-prev {
@@ -311,4 +239,9 @@ body {
   right: 100px;
   z-index: 999;
 }
+
+.img-icon {
+  border-radius:4px;
+}
+
 </style>
